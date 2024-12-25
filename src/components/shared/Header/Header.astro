@@ -1,12 +1,11 @@
 ---
 import Link from "@components/links/Link/Link.astro";
-import { ROUTER } from "../../../pages/router";
+import { PAGES } from "src/pages/router";
 ---
 
 <header>
   <nav>
-    <Link href={ROUTER.home.href}>{ROUTER.home.display}</Link>
-    <Link href={ROUTER.contact.href}>{ROUTER.contact.display}</Link>
+    {PAGES.map((page) => <Link href={page.href}>{page.display}</Link>)}
   </nav>
 </header>
 

@@ -8,13 +8,31 @@ import Btn from "@components/buttons/Btn/Btn.astro";
 
 <Layout title={ROUTER.login.display}>
   <main>
-    <form>
-      <Email />
-      <Password />
-      <Btn>Login</Btn>
+    <form id="login-form">
+      <Email name={"email"} />
+      <Password name={"password"} />
+      <Btn id={"submit-login"}>Login</Btn>
     </form>
   </main>
 </Layout>
+
+<script>
+  import { DOM } from "src/dom/dom";
+
+  document.addEventListener("astro:page-load", () => {
+    const form = DOM.select("login-form") as HTMLFormElement;
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const email = formData.get("email");
+      const password = formData.get("password");
+
+      console.log(email, password);
+    });
+  });
+</script>
 
 <style>
   form {

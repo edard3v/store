@@ -17,6 +17,7 @@ import Btn from "@components/buttons/Btn/Btn.astro";
 </Layout>
 
 <script>
+  import { actions } from "astro:actions";
   import { DOM } from "src/dom/dom";
 
   document.addEventListener("astro:page-load", () => {
@@ -26,10 +27,8 @@ import Btn from "@components/buttons/Btn/Btn.astro";
       e.preventDefault();
 
       const formData = new FormData(form);
-      const email = formData.get("email");
-      const password = formData.get("password");
 
-      console.log(email, password);
+      actions.login(formData);
     });
   });
 </script>

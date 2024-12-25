@@ -8,13 +8,40 @@ import Password from "@components/inputs/Password/Password.astro";
 
 <Layout title={ROUTER.register.display}>
   <main>
-    <form>
-      <Email />
-      <Password />
+    <form id="register-form">
+      <Email name={"email"} />
+      <Password name={"password"} />
       <Btn>Registrarse</Btn>
     </form>
   </main>
 </Layout>
+
+<script>
+  import { actions } from "astro:actions";
+  import { DOM } from "src/dom/dom";
+  import { ROUTER } from "../router";
+  import { navigate } from "astro:transitions/client";
+  import Swal from "sweetalert2";
+
+  document.addEventListener("astro:page-load", () => {
+    const form = DOM.select("register-form") as HTMLFormElement;
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const { error } = await actions.register(formData);
+
+      if (!error) return navigate(ROUTER.login.href);
+
+      Swal.fire({
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    });
+  });
+</script>
 
 <style>
   form {

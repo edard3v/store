@@ -2,7 +2,7 @@ import { Accounts, db, eq, Roles } from "astro:db";
 import bcrypt from "bcrypt";
 import { BCRYPT } from "src/bcrypt/const";
 
-export const addAccount = async (credencials: Credencials) => {
+export const registerAccount = async (credencials: Credencials) => {
   const { email, password } = credencials;
 
   const [role] = await db.select().from(Roles).where(eq(Roles.name, "CLIENT"));

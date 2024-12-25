@@ -18,7 +18,11 @@ import Btn from "@components/buttons/Btn/Btn.astro";
 
 <script>
   import { actions } from "astro:actions";
+  import { navigate } from "astro:transitions/client";
   import { DOM } from "src/dom/dom";
+  import { ROUTER } from "../router";
+  import Swal from "sweetalert2";
+  import "sweetalert2/dist/sweetalert2.min.css";
 
   document.addEventListener("astro:page-load", () => {
     const form = DOM.select("login-form") as HTMLFormElement;
@@ -28,7 +32,15 @@ import Btn from "@components/buttons/Btn/Btn.astro";
 
       const formData = new FormData(form);
 
-      actions.login(formData);
+      const { error } = await actions.login(formData);
+
+      if (!error) return navigate(ROUTER.account.href);
+
+      Swal.fire({
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
     });
   });
 </script>

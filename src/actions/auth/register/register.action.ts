@@ -1,7 +1,6 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { addAccount } from "./addAccount.service";
-import { EdarErr } from "src/errors/EdarErr";
+import { registerAccount } from "./registerAccount.service";
 
 export const register = defineAction({
   accept: "form",
@@ -11,7 +10,7 @@ export const register = defineAction({
   }),
   async handler(form) {
     try {
-      const result = await addAccount(form);
+      const result = await registerAccount(form);
 
       return result;
     } catch {

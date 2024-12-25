@@ -11,10 +11,8 @@
   "dependencies": {
     "@astrojs/cloudflare": "12.1.0",
     "@astrojs/db": "0.14.5",
-    "@auth/core": "0.37.4",
     "@fontsource-variable/work-sans": "5.1.0",
     "astro": "5.1.1",
-    "auth-astro": "4.2.0",
     "bcrypt": "5.1.1"
   },
   "devDependencies": {

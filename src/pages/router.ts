@@ -3,10 +3,6 @@ export const ROUTER = {
     href: "/home/",
     display: "Inicio",
   },
-  contact: {
-    href: "/contact/",
-    display: "Cotacto",
-  },
   login: {
     href: "/login/",
     display: "Login",

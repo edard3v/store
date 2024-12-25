@@ -3,13 +3,23 @@ import Layout from "@layouts/Layout/Layout.astro";
 import { ROUTER } from "../router";
 import Email from "@components/inputs/Email/Email.astro";
 import Btn from "@components/buttons/Btn/Btn.astro";
+import Password from "@components/inputs/Password/Password.astro";
 ---
 
 <Layout title={ROUTER.register.display}>
   <main>
     <form>
       <Email />
+      <Password />
       <Btn>Registrarse</Btn>
     </form>
   </main>
 </Layout>
+
+<style>
+  form {
+    display: grid;
+    gap: var(--md);
+    justify-content: center;
+  }
+</style>

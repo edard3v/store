@@ -18,9 +18,14 @@ const { class: cls, ...rest } = Astro.props;
     border: var(--border);
     color: var(--white);
     transition: background-color 0.7s;
+    min-height: var(--h-input);
 
     &:hover:not(:disabled) {
-      outline: 3px solid var(--primary);
+      outline: var(--outline);
+    }
+
+    &:focus {
+      outline: var(--outline);
     }
   }
 </style>

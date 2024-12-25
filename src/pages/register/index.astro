@@ -1,10 +1,15 @@
 ---
 import Layout from "@layouts/Layout/Layout.astro";
 import { ROUTER } from "../router";
+import Email from "@components/inputs/Email/Email.astro";
+import Btn from "@components/buttons/Btn/Btn.astro";
 ---
 
 <Layout title={ROUTER.register.display}>
   <main>
-    <h1>Register</h1>
+    <form>
+      <Email />
+      <Btn>Registrarse</Btn>
+    </form>
   </main>
 </Layout>

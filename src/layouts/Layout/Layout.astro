@@ -1,0 +1,66 @@
+---
+import { SEO } from "./seo";
+import "@styles/index.css";
+import { ClientRouter } from "astro:transitions";
+import "@fontsource-variable/work-sans"; // Supports weights 100-900
+import Header from "@components/shared/Header/Header.astro";
+import Footer from "@components/shared/Footer/Footer.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content={SEO.description} />
+    <meta name="author" content={SEO.author} />
+    <meta name="language" content="es" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={SEO.keywords} />
+
+    <!--OG Metatags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:description" content={SEO.description} />
+    <meta property="og:image" content={SEO.img} />
+
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :root {
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--paras);
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    main {
+      max-width: 1920px;
+      padding: var(--lg);
+    }
+  }
+</style>

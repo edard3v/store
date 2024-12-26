@@ -1,6 +1,6 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { loginAccount } from "./loginAccount.service";
+import { loginService } from "./login.service";
 
 export const login = defineAction({
   accept: "form",
@@ -9,6 +9,6 @@ export const login = defineAction({
     password: z.string().min(6),
   }),
   async handler(form) {
-    return await loginAccount(form);
+    return await loginService(form);
   },
 });

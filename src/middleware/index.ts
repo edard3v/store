@@ -1,5 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
-import { ROUTER } from "src/pages/router";
+import { ROUTER } from "src/pages/_router";
 
 export const onRequest = defineMiddleware((context, next) => {
   console.log("middleware");

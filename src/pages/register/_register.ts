@@ -1,6 +1,6 @@
 import { actions } from "astro:actions";
 import { DOM } from "src/dom/dom";
-import { ROUTER } from "../router";
+import { ROUTER } from "../_router";
 import { navigate } from "astro:transitions/client";
 import Swal from "sweetalert2";
 

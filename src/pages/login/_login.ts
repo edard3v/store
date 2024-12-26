@@ -1,7 +1,7 @@
 import { actions } from "astro:actions";
 import { navigate } from "astro:transitions/client";
 import { DOM } from "src/dom/dom";
-import { ROUTER } from "../router";
+import { ROUTER } from "../_router";
 import Swal from "sweetalert2";
 
 document.addEventListener("astro:page-load", () => {

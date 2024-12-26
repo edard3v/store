@@ -1,7 +1,8 @@
 import type { APIRoute } from "astro";
-import { verifyToken } from "src/middleware/verifyToken";
+import { verifyToken } from "src/jwt/verifyToken";
 import { finishRegisterService } from "./_finishRegister.service";
 import type { Auth } from "src/actions/auth/types";
+import { Res } from "../res/_res";
 
 export const prerender = false;
 
@@ -13,16 +14,8 @@ export const GET: APIRoute = async ({ params }) => {
 
     await finishRegisterService(credencials);
 
-    return new Response(
-      JSON.stringify({
-        msg: "¡Registro confirmado con éxito! Ya puede iniciar sesión sin problemas.",
-      }),
-      {
-        status: 201,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  } catch (error) {
-    throw error;
+    return Res.json(201, "Ya puede iniciar sesión sin problemas.");
+  } catch (error: any) {
+    return Res.json(error?.status, error?.msg);
   }
 };

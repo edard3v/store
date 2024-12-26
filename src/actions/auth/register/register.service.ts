@@ -5,8 +5,9 @@ import jwt from "jsonwebtoken";
 import { BCRYPT } from "src/bcrypt/const";
 import { JWT } from "src/jwt/const";
 import { sendMailToVerifyRegister } from "./sendMailToVerifyRegister.service";
+import type { Auth } from "../types";
 
-export const registerService = async (credencials: Credencials) => {
+export const registerService = async (credencials: Auth) => {
   const [account] = await db.select().from(Accounts);
 
   if (account.email == credencials.email)
@@ -16,17 +17,15 @@ export const registerService = async (credencials: Credencials) => {
     });
 
   const passHashed = bcrypt.hashSync(credencials.password, BCRYPT.salt);
+  const newRegister: Auth = { email: credencials.email, password: passHashed };
+  const opt = { expiresIn: JWT.expiresInToRegister };
 
-  const token = jwt.sign({ email: credencials.email, passHashed }, JWT.secret, {
-    expiresIn: JWT.expiresInToRegister,
-  });
+  const token = jwt.sign(newRegister, JWT.secret, opt);
 
-  const link = `${import.meta.env.API_BASE_URL}/verify-register?token=${token}`;
+  const link = `${import.meta.env.API_BASE_URL}/finish-register/${token}`;
   await sendMailToVerifyRegister(credencials.email, link);
 
   return {
-    msg: "Le hemos enviado un correo electrónico. Por favor, revisa tu bandeja de entrada y confirme su registro.",
+    msg: "Por favor, revise su bandeja de entrada y confirme el registro antes de iniciar sesión.",
   };
 };
-
-type Credencials = { email: string; password: string };

@@ -1,9 +1,9 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
-import cloudflare from "@astrojs/cloudflare";
-
 import db from "@astrojs/db";
+
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,7 +12,8 @@ export default defineConfig({
       assetsInlineLimit: 0,
     },
   },
+
   output: "static",
-  adapter: cloudflare(),
+  adapter: netlify(),
   integrations: [db()],
 });

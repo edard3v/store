@@ -2,9 +2,11 @@
 import Layout from "@layouts/Layout/Layout.astro";
 import { ROUTER } from "../router";
 
+export const prerender = false;
+
 const isAuth = Astro.locals.isAuth;
 
-if (!isAuth) return Astro.redirect(ROUTER.home.href);
+if (!isAuth) return Astro.redirect(ROUTER.login.href);
 ---
 
 <Layout title={ROUTER.account.display}>

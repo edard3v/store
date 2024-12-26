@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 
 import db from "@astrojs/db";
 
-import cloudflare from "@astrojs/cloudflare";
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,5 +15,5 @@ export default defineConfig({
 
   integrations: [db()],
   output: "static",
-  adapter: cloudflare(),
+  adapter: netlify(),
 });

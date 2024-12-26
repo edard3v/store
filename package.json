@@ -15,10 +15,12 @@
     "astro": "5.1.1",
     "bcrypt": "5.1.1",
     "jsonwebtoken": "9.0.2",
+    "nodemailer": "6.9.16",
     "sweetalert2": "11.15.3"
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.2",
-    "@types/jsonwebtoken": "9.0.7"
+    "@types/jsonwebtoken": "9.0.7",
+    "@types/nodemailer": "6.4.17"
   }
 }

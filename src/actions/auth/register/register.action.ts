@@ -1,6 +1,6 @@
-import { ActionError, defineAction } from "astro:actions";
+import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { registerAccount } from "./registerAccount.service";
+import { registerService } from "./register.service";
 
 export const register = defineAction({
   accept: "form",
@@ -10,14 +10,11 @@ export const register = defineAction({
   }),
   async handler(form) {
     try {
-      const result = await registerAccount(form);
+      const result = await registerService(form);
 
       return result;
-    } catch {
-      throw new ActionError({
-        code: "BAD_REQUEST",
-        message: "Err de registro",
-      });
+    } catch (error) {
+      console.log(error);
     }
   },
 });

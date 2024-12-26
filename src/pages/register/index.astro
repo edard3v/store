@@ -4,10 +4,11 @@ import { ROUTER } from "../router";
 import Email from "@components/inputs/Email/Email.astro";
 import Btn from "@components/buttons/Btn/Btn.astro";
 import Password from "@components/inputs/Password/Password.astro";
+import css from "./_register.module.css";
 ---
 
 <Layout title={ROUTER.register.display}>
-  <main>
+  <main class={css.register}>
     <form id="register-form">
       <Email name={"email"} />
       <Password name={"password"} />
@@ -17,37 +18,5 @@ import Password from "@components/inputs/Password/Password.astro";
 </Layout>
 
 <script>
-  import { actions } from "astro:actions";
-  import { DOM } from "src/dom/dom";
-  import { ROUTER } from "../router";
-  import { navigate } from "astro:transitions/client";
-  import Swal from "sweetalert2";
-  import "sweetalert2/dist/sweetalert2.min.css";
-
-  document.addEventListener("astro:page-load", () => {
-    const form = DOM.select("register-form") as HTMLFormElement;
-    form?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-
-      const { error } = await actions.register(formData);
-
-      if (!error) return navigate(ROUTER.login.href);
-
-      Swal.fire({
-        text: error.message,
-        icon: "error",
-        confirmButtonText: "Aceptar",
-      });
-    });
-  });
+  import "./register";
 </script>
-
-<style>
-  form {
-    display: grid;
-    gap: var(--md);
-    justify-content: center;
-  }
-</style>

@@ -12,6 +12,10 @@ import css from "./_login.module.css";
     <form id="login-form">
       <Email name={"email"} />
       <Password name={"password"} />
+      <div>
+        <span>¿No tienes una cuenta?</span>
+        <a href={ROUTER.register.href}>Registarse</a>
+      </div>
       <Btn id={"submit-login"}>Login</Btn>
     </form>
   </main>

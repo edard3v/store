@@ -1,11 +1,17 @@
 ---
 import Link from "@components/links/Link/Link.astro";
-import { PAGES } from "src/pages/_router";
+import { ROUTER } from "src/pages/_router";
+
+const { home, login, account } = ROUTER;
+const isAuth = Astro.cookies.get("token")?.value;
 ---
 
 <header>
   <nav>
-    {PAGES.map((page) => <Link href={page.href}>{page.display}</Link>)}
+    <Link href={home.href}>{home.display}</Link>
+    {!isAuth && <Link href={login.href}>{login.display}</Link>}
+
+    {isAuth && <Link href={account.href}>{account.display}</Link>}
   </nav>
 </header>
 

@@ -20,6 +20,6 @@ export const login = defineAction({
       path: "/", // La cookie estará disponible para todo el dominio
     });
 
-    return { success: true };
+    return { msg: "Ha iniciado sesión correctamente." };
   },
 });

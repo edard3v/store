@@ -4,8 +4,6 @@ import { finishRegisterService } from "./_finishRegister.service";
 import type { Auth } from "src/actions/auth/types";
 import { Res } from "../res/_res";
 
-export const prerender = false;
-
 export const GET: APIRoute = async ({ params }) => {
   const { token } = params as { token: string };
 

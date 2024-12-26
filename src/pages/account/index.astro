@@ -1,10 +1,9 @@
 ---
 import Layout from "@layouts/Layout/Layout.astro";
 import { ROUTER } from "../_router";
+import Btn from "@components/buttons/Btn/Btn.astro";
 
-export const prerender = false;
-
-const isAuth = Astro.locals.isAuth;
+const isAuth = !!Astro.cookies.get("token")?.value;
 
 if (!isAuth) return Astro.redirect(ROUTER.login.href);
 ---
@@ -12,5 +11,21 @@ if (!isAuth) return Astro.redirect(ROUTER.login.href);
 <Layout title={ROUTER.account.display}>
   <main>
     <h1>Account</h1>
+    <Btn id={"btn-logout"}>Cerrar sesión</Btn>
   </main>
 </Layout>
+
+<script>
+  import { actions } from "astro:actions";
+  import { navigate } from "astro:transitions/client";
+  import { DOM } from "src/dom/dom";
+  import { ROUTER } from "../_router";
+
+  document.addEventListener("astro:page-load", () => {
+    const btn = DOM.select("btn-logout");
+    btn?.addEventListener("click", async () => {
+      await actions.logout();
+      navigate(ROUTER.home.href);
+    });
+  });
+</script>

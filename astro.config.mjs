@@ -14,6 +14,6 @@ export default defineConfig({
   },
 
   integrations: [db()],
-  output: "static",
+  output: "server",
   adapter: netlify(),
 });

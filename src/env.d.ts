@@ -1,5 +1,5 @@
 declare namespace App {
   interface Locals {
-    isAuth;
+    isAuth: boolean;
   }
 }

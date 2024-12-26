@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { verifyToken } from "src/middleware/verifyToken";
-import { finishRegisterService } from "./finishRegister.service";
+import { finishRegisterService } from "./_finishRegister.service";
 import type { Auth } from "src/actions/auth/types";
 
 export const prerender = false;

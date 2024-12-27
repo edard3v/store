@@ -1,14 +1,14 @@
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { JWT } from "./const";
+import { verifyToken } from "./verifyToken";
+import type { TokenDecoded } from "src/actions/auth/login/login.service";
 
 export const refreshTokenService = (token: string) => {
-  const tokenPayload = jwt.decode(token) as JwtPayload;
+  const decoded = verifyToken(token) as TokenDecoded;
 
-  const newPayload = { ...tokenPayload };
-  if (newPayload.iat) delete newPayload.iat;
-  if (newPayload.exp) delete newPayload.exp;
+  const { iat, exp, ...rest } = decoded;
 
-  const newToken = jwt.sign(newPayload, JWT.secret as string, {
+  const newToken = jwt.sign(rest, JWT.secret as string, {
     expiresIn: JWT.expiresIn,
   });
 

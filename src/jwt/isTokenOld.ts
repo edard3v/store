@@ -1,14 +1,12 @@
 import jwt, { type JwtPayload } from "jsonwebtoken";
 
 export const isTokenOld = (token: string): boolean => {
-  const { iat } = jwt.decode(token) as JwtPayload;
+  const payload = jwt.decode(token) as JwtPayload;
 
-  if (!iat) {
-    throw new Error("El token no contiene información de emisión (iat).");
-  }
+  if (!payload?.iat) return true;
 
   const currentTime = Math.floor(Date.now() / 1000); // Tiempo actual en segundos
-  const days = 3 * 24 * 60 * 60; // 3 días en segundos
+  const days = 15; // 3 días en segundos 3 * 24 * 60 * 60
 
-  return currentTime - iat > days;
+  return currentTime - payload.iat > days;
 };

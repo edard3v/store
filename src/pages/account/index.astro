@@ -2,10 +2,33 @@
 import Layout from "@layouts/Layout/Layout.astro";
 import { ROUTER } from "../_router";
 import Btn from "@components/buttons/Btn/Btn.astro";
+import { isTokenOld } from "src/jwt/isTokenOld";
+import { refreshToken } from "src/jwt/refreshToken";
 
-const isAuth = !!Astro.cookies.get("token")?.value;
+const token = Astro.cookies.get("token")?.value;
+if (!token) return Astro.redirect(ROUTER.login.href);
+if (isTokenOld(token)) {
+  try {
+    const newToken = refreshToken(token);
 
-if (!isAuth) return Astro.redirect(ROUTER.login.href);
+    Astro.cookies.set("token", newToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60,
+      path: "/",
+    });
+  } catch {
+    Astro.cookies.set("token", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 0,
+      path: "/",
+    });
+    return Astro.redirect(ROUTER.login.href);
+  }
+}
 ---
 
 <Layout title={ROUTER.account.display}>

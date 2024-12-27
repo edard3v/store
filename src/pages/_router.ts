@@ -17,4 +17,6 @@ export const ROUTER = {
   },
 };
 
+export const PROTECTED = ["/account/"];
+
 export const PAGES = Object.entries(ROUTER).map(([_, value]) => value);

@@ -3,7 +3,7 @@ import { JWT } from "./const";
 import { verifyToken } from "./verifyToken";
 import type { TokenDecoded } from "src/actions/auth/login/login.service";
 
-export const refreshTokenService = (token: string) => {
+export const refreshToken = (token: string) => {
   const decoded = verifyToken(token) as TokenDecoded;
 
   const { iat, exp, ...rest } = decoded;
